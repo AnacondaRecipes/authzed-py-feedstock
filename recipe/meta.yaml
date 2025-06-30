@@ -1,0 +1,57 @@
+{% set name = "authzed" %}
+{% set version = "1.21.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/{{ name }}/{{ name }}-py/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: df0a28e46c7dcd68225c3013193f1eeda28aa021673569a75f3291a75f8ec7ef
+
+build:
+  number: 0
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vvv
+  skip: True  # [py<39]
+
+requirements:
+  build:
+  host:
+    - python
+    - poetry-core >=1.0.0
+  run:
+    - python
+    - poetry-core >=1.0.0
+
+    - protobuf >=5.26,<6
+    - grpc-interceptor >=0.15.4
+    - googleapis-common-protos >=1.65.0
+    - protovalidate >=0.7.1,<0.13.0
+
+test:
+  imports:
+    - authzed.api.v1
+  requires:
+    - pip
+  commands:
+    - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+
+about:
+  home: https://github.com/authzed/authzed-py/tree/main
+  license: Apache-2
+  license_family: Apache
+  license_file: LICENSE.txt
+  summary: Official SpiceDB client library for Python
+  description: |
+    Authzed is a database and service that stores, computes, and validates your
+    application's permissions.
+    Developers create a schema that models their permissions requirements and use
+    a client library, such as this one, to apply the schema to the database, insert
+    data into the database, and query the data to efficiently check permissions in
+    their applications.
+  dev_url: https://github.com/authzed/authzed-py/tree/main
+
+extra:
+  recipe-maintainers:
+    - TS-ANC
