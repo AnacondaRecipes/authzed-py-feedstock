@@ -22,7 +22,6 @@ requirements:
     - poetry-core >=1.0.0
   run:
     - python
-    - poetry-core >=1.0.0
     - grpcio >=1.63
     - protobuf >=5.26,<6
     - grpc-interceptor >=0.15.4
@@ -40,7 +39,7 @@ test:
 
 about:
   home: https://github.com/authzed/authzed-py/tree/main
-  license: Apache-2
+  license: Apache-2.0
   license_family: Apache
   license_file: LICENSE.txt
   summary: Official SpiceDB client library for Python
@@ -52,6 +51,7 @@ about:
     data into the database, and query the data to efficiently check permissions in
     their applications.
   dev_url: https://github.com/authzed/authzed-py/tree/main
+  doc_url: https://authzed.com/docs
 
 extra:
   recipe-maintainers:

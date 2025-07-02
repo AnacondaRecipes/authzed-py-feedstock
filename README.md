@@ -5,7 +5,7 @@ Feedstock license: [BSD-3-Clause](LICENSE)
 
 Home: https://github.com/authzed/authzed-py/tree/main
 
-Package license: Apache-2
+Package license: Apache-2.0
 
 Summary: Official SpiceDB client library for Python
 
