@@ -22,9 +22,9 @@ requirements:
     - poetry-core >=1.0.0
   run:
     - python
-    - grpcio >=1.63
-    - protobuf >=5.26,<6
-    - grpc-interceptor >=0.15.4
+    - grpcio >=1.63, <2
+    - protobuf >=5.26, <6
+    - grpc-interceptor >=0.15.4, <0.16.0
     - googleapis-common-protos >=1.65.0
 
 test:
@@ -40,7 +40,7 @@ test:
     # connect to remote host: Connection refused"
 
 about:
-  home: https://github.com/authzed/authzed-py/tree/main
+  home: https://authzed.com
   license: Apache-2.0
   license_family: Apache
   license_file: LICENSE
@@ -52,7 +52,7 @@ about:
     a client library, such as this one, to apply the schema to the database, insert
     data into the database, and query the data to efficiently check permissions in
     their applications.
-  dev_url: https://github.com/authzed/authzed-py/tree/main
+  dev_url: https://github.com/authzed/authzed-py
   doc_url: https://authzed.com/docs
 
 extra:
