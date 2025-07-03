@@ -35,13 +35,15 @@ test:
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    # Tests depends on missing packages
+    # Upstream tests require connection to local server, for which is not available:
+    # "failed to connect to all addresses; last error: UNKNOWN: ipv4:127.0.0.1:50051: Failed to 
+    # connect to remote host: Connection refused"
 
 about:
   home: https://github.com/authzed/authzed-py/tree/main
   license: Apache-2.0
   license_family: Apache
-  license_file: LICENSE.txt
+  license_file: LICENSE
   summary: Official SpiceDB client library for Python
   description: |
     Authzed is a database and service that stores, computes, and validates your
