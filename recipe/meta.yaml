@@ -1,47 +1,51 @@
 {% set name = "authzed" %}
-{% set version = "1.20.0" %}
+{% set version = "1.24.0" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name|lower }}-split
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 7610e6b897d4a61765739183e68ca3de32cbc6dc0dc1df247444ae129e58627d
+  url: https://github.com/{{ name }}/{{ name }}-py/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 48c6debdcbce2bfe897e2957addae86fe8f3697141615ec51e3cc8edbd878a18
+  patches:
+    - patches/0001-Apply-proper-version.patch
 
 build:
-  number: 1
-  skip: True  # [py<38]
+  number: 0
+  skip: true  # [py<39]
 
 outputs:
   - name: {{ name }}
-    build:
-      script: python -m pip install --no-deps --no-build-isolation --ignore-installed .
+    script: build_base.sh  # [unix]
+    script: build_base.bat # [win]
     requirements:
       host:
         - python
         - pip
-        - poetry-core >=1.0.0
+        - uv-build >=0.8.15,<0.10.0
       run:
         - python
         - grpcio >=1.63,<2
-        - protobuf >=5.26,<6
+        - protobuf >=5.26,<7
         - grpc-interceptor >=0.15.4,<0.16.0
-        - googleapis-common-protos >=1.65.0
+        - googleapis-common-protos >=1.65.0,<2
+        - protovalidate-python >=0.7.1,<1.1.0
     test:
       imports:
+        - authzed.api.v0
+        - authzed.api.materialize.v0
         - authzed.api.v1
+        - authzed.api.v1alpha1
       requires:
         - pip
       commands:
         - pip check
         - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
         # Upstream tests require connection to local server, for which is not available:
-        # "failed to connect to all addresses; last error: UNKNOWN: ipv4:127.0.0.1:50051: Failed to 
+        # "failed to connect to all addresses; last error: UNKNOWN: ipv4:127.0.0.1:50051: Failed to
         # connect to remote host: Connection refused"
-
-  - name: authzed-py
-    build:
+  - name: {{ name }}-py
     requirements:
       host:
         - python
@@ -50,7 +54,10 @@ outputs:
         - {{ pin_subpackage(name, exact=True) }}
     test:
       imports:
+        - authzed.api.v0
+        - authzed.api.materialize.v0
         - authzed.api.v1
+        - authzed.api.v1alpha1
       requires:
         - pip
       commands:

@@ -1,0 +1,26 @@
+From fa952238c29cab84ad8dc085feb33c5ae5a22cd9 Mon Sep 17 00:00:00 2001
+From: Mikolaj Gralczyk <mgralczyk@anaconda.com>
+Date: Thu, 18 Dec 2025 17:56:27 +0100
+Subject: [PATCH] Apply proper version
+
+The version is applied during publishing to pypi through uv.
+In conda env, it has to be applied in pyproject.toml
+---
+ pyproject.toml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pyproject.toml b/pyproject.toml
+index 5839fcd..29ae7dd 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -1,6 +1,6 @@
+ [project]
+ name = "authzed"
+-version = "0.0.0"
++version = "1.24.0"
+ description = "Client library for SpiceDB."
+ authors = [{ name = "Authzed", email = "support@authzed.com" }]
+ requires-python = ">=3.9,<4"
+-- 
+2.50.1 (Apple Git-155)
+
