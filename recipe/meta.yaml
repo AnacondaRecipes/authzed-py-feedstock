@@ -12,7 +12,7 @@ source:
     - patches/0001-Apply-proper-version.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<39]
 
 outputs:
@@ -29,7 +29,8 @@ outputs:
         - grpcio >=1.63,<2
         - protobuf >=5.26,<7
         - grpc-interceptor >=0.15.4,<0.16.0
-        - googleapis-common-protos >=1.65.0,<2
+        - googleapis-common-protos >=1.65.0,<2 # [py<314]
+        - googleapis-common-protos >=1.69.2,<2 # [py>=314]
         - protovalidate-python >=0.7.1,<1.1.0
     test:
       imports:
