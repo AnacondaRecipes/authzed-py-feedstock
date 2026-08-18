@@ -17,7 +17,7 @@ index 5839fcd..29ae7dd 100644
  [project]
  name = "authzed"
 -version = "0.0.0"
-+version = "1.24.0"
++version = "1.25.0"
  description = "Client library for SpiceDB."
  authors = [{ name = "Authzed", email = "support@authzed.com" }]
  requires-python = ">=3.9,<4"
