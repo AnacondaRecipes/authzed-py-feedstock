@@ -23,15 +23,17 @@ outputs:
       host:
         - python
         - pip
-        - uv-build >=0.8.15,<0.10.0
+        - uv-build >=0.8.15,<0.12.0
       run:
         - python
         - grpcio >=1.63,<2
-        - protobuf >=5.26,<7
+        - protobuf >=5.26,<8
         - grpc-interceptor >=0.15.4,<0.16.0
         - googleapis-common-protos >=1.65.0,<2  # [py<314]
         - googleapis-common-protos >=1.69.2,<2  # [py>=314]
-        - protovalidate-python >=0.7.1,<1.1.0
+      run_constrained:
+        # validation
+        - protovalidate >=0.7.1,<1.2.0
     test:
       imports:
         - authzed.api.v0
